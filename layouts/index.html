@@ -1,0 +1,102 @@
+{{ define "headStyle" }}
+<style>
+    body {
+        position: relative;
+        background-color: black;
+        height: 100%;
+    }
+
+    .btn-outline-primary {
+        border-color: white;
+        color: #fff;
+    }
+
+    .name {
+        font-size: 700%;
+    }
+
+    .container-fluid {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        color: #fff;
+    }
+
+    #heading {
+        height: 100vh;
+        overflow: auto;
+        background-image: url('img/section0-bg.jpg');
+    }
+
+    #about,
+    #projects {
+        min-height: 500px;
+    }
+
+    #projects {
+        background-image: url('img/section2-bg.jpg');
+        background-position: center;
+        background-size: cover;
+    }
+</style>
+
+{{ end }}
+
+
+{{ define "main" }}
+
+{{ $sections := $.Site.GetPage "/sections" }}
+
+{{ range $elem := $sections.Resources }}
+
+<section id="{{ $elem.Params.section_id }}" class="container-fluid">
+
+
+    {{ if eq $elem.Params.title "Header" }}
+    <div class="col-sm-6">
+        <h1 class="text-center name mw-100">{{ $elem.Params.name }}</h1>
+    </div>
+
+    {{ else if eq $elem.Params.title "Other Interests" }}
+    <div class="col-lg-8 p-4">
+
+        <h1 class=" text-center">{{ $elem.Params.title }}</h1>
+        <div class="row h-100 p-4">
+            <div class="col-md-6">
+                {{ .Scratch.Set "dir" "img/climbing/" }}
+                {{ .Scratch.Set "carId" "vert"}}
+                {{ partial "imageCarosel.html" . }}
+
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    {{ .Scratch.Set "dir" "img/horTop" }}
+                    {{ .Scratch.Set "carId" "horTop" }}
+                    {{ partial "imageCarosel" . }}
+                </div>
+                <div class="row">
+                    {{ .Scratch.Set "dir" "img/horBottom" }}
+                    {{ .Scratch.Set "carId" "horBottom" }}
+                    {{ partial "imageCarosel" . }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ else }}
+    <div class="col-sm-6">
+        <div class="text-center">
+            <h1>{{ $elem.Params.title }}</h1>
+            {{ .Content }}
+        </div>
+    </div>
+
+    {{ end }}
+
+</section>
+
+{{ end }}
+
+{{ end }}
