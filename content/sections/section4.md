@@ -5,7 +5,7 @@ section_id: contact
 ---
 
 {{< socailhandles >}}
-{{< linkedin user="brendanmurphy42" >}}
+{{< linkedin user="btsk" >}}
 {{< github user="thesimplekid" >}}
 {{< email email="website@btsk.xyz" >}}
 {{< resume >}}
